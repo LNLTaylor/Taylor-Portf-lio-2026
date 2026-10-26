@@ -1,0 +1,211 @@
+/* Reset, estilos globais e componentes reutilizáveis. */
+
+/* ========================================
+RESET BÁSICO
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+font-family: Arial, sans-serif;
+background: var(--bg-primary);
+color: var(--text-primary);
+line-height: 1.6;
+}
+
+
+
+
+
+/* ========================================
+CONTAINER GLOBAL
+======================================== */
+
+.container {
+width: 90%;
+max-width: var(--container-width);
+margin: 0 auto;
+}
+
+/* ========================================
+ESTILOS GERAIS
+======================================== */
+
+section {
+padding: var(--spacing-2xl) 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+color: var(--text-primary);
+font-weight: var(--fw-bold);
+line-height: 1.2;
+}
+
+h1 {
+font-size: var(--fs-2xl);
+}
+
+h2 {
+font-size: var(--fs-xl);
+}
+
+p {
+color: var(--text-secondary);
+}
+
+a {
+text-decoration: none;
+color: inherit;
+}
+
+ul {
+list-style: none;
+}
+
+img {
+width: 100%;
+display: block;
+}
+
+/* ========================================
+BOTÕES BASE
+======================================== */
+
+button,
+.btn {
+border: none;
+outline: none;
+cursor: pointer;
+
+
+padding:
+    var(--spacing-sm)
+    var(--spacing-lg);
+
+border-radius: var(--radius-md);
+
+font-size: var(--fs-md);
+font-weight: var(--fw-medium);
+
+transition: var(--transition-normal);
+
+
+}
+
+/* ========================================
+BOTÃO PRIMARY
+======================================== */
+
+.btn-primary {
+background: var(--color-cyan);
+color: var(--bg-primary);
+
+
+box-shadow: var(--glow-cyan);
+
+
+}
+
+.btn-primary:hover {
+transform: translateY(-3px);
+
+
+box-shadow: var(--glow-hover);
+
+
+}
+
+/* ========================================
+BOTÃO SECONDARY
+======================================== */
+
+.btn-secondary {
+background: transparent;
+
+
+border:
+    1px solid var(--color-cyan);
+
+color: var(--color-cyan);
+
+
+}
+
+.btn-secondary:hover {
+background: rgba(0, 229, 255, 0.1);
+}
+
+/* ========================================
+CARTÃO BASE
+======================================== */
+
+.card {
+background: var(--bg-card);
+
+
+border:
+    1px solid var(--border-color);
+
+border-radius: var(--radius-lg);
+
+padding: var(--spacing-lg);
+
+box-shadow: var(--shadow-md);
+
+transition: var(--transition-normal);
+
+
+}
+
+.card:hover {
+transform: translateY(-5px);
+
+
+border-color: var(--color-cyan);
+
+box-shadow: var(--glow-hover);
+
+
+}
+
+/* ========================================
+GRADE BASE
+======================================== */
+
+.grid {
+display: grid;
+gap: var(--spacing-lg);
+}
+
+/* ========================================
+UTILITÁRIOS FLEX
+======================================== */
+
+.flex {
+display: flex;
+}
+
+.flex-center {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.flex-between {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}

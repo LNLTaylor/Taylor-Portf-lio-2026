@@ -1,0 +1,177 @@
+/* Carrosséis, filtros e interações de habilidades. */
+
+/* ========================================
+CARROSSÉIS
+======================================== */
+
+.areas-slider{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
+    padding: 15px;
+    margin:2rem auto;
+
+
+
+}
+
+.area-track{
+
+
+    display:flex;
+    gap:1.5rem;
+    width:100%;
+    max-width:700px;
+    overflow-x:auto;
+
+    scroll-behavior:smooth;
+
+
+
+    flex:1;
+    scroll-snap-type:x mandatory;
+    margin-bottom:2rem;
+    margin-top:2rem;
+     margin:0 auto;
+   -webkit-overflow-scrolling: touch;
+
+    border-radius: 20px;
+
+
+}
+
+
+   .slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+   border-radius:20px;
+   width:100%;
+   min-width:0;
+    overflow:hidden;
+
+}
+
+
+
+
+
+
+.slider-btn{
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:42px;
+
+    height:42px;
+
+    padding:0;
+
+    line-height:1;
+
+    font-size:1.2rem;
+    border-radius:50%;
+    background:var(--bg-card);
+    border:1px solid var(--border-color);
+    color:var(--color-cyan);
+}
+
+.slider-btn:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+        0 0 15px rgba(0,255,255,.35);
+
+}
+
+
+
+
+.skills-filters{
+    border-radius: 10px;
+    display:flex;
+      padding: .3rem 1rem .8rem;
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    overflow-x:auto;
+
+    gap:.8rem;
+
+    padding-bottom:.5rem;
+
+    scrollbar-width:100%;
+    scrollbar-color: var(--color-cyan) transparent;
+
+
+}
+
+.skills-filters::-webkit-scrollbar{
+    display:none;
+}
+
+.skill-filter{
+    padding:.8rem 1.2rem;
+
+    border:none;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    background:var(--card-bg);
+
+    color:var(--text-color);
+
+    transition:.3s;
+
+     white-space:nowrap;
+
+    flex-shrink:0;
+
+}
+
+.skill-filter:first-child{
+    margin-left:.2rem;
+}
+
+.skill-filter:last-child{
+    margin-right:1rem;
+}
+
+.skill-filter:hover{
+    transform:translateY(-2px);
+}
+
+.skill-filter.active{
+    background:var(--accent-color);
+
+    color:#000;
+
+    font-weight:600;
+}
+
+.habilidade-categoria{
+    display:none;
+     width:min(900px,100%);
+    margin:0 auto;
+}
+
+.habilidade-categoria.active-skill{
+    display:block;
+}
+
+/* ========================================
+RESPONSIVIDADE
+======================================== */

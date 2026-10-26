@@ -1,0 +1,349 @@
+/* Formulários e canais de contato. */
+
+/* ==================================
+   CONTATO
+================================== */
+
+.contact-cta-section{
+    padding: 6rem 2rem;
+    background: var(--bg-primary);
+}
+
+.contact-cta-inner{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-cta-header{
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 3rem;
+}
+
+.contact-cta-kicker{
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--color-cyan);
+}
+
+.contact-cta-header h2{
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.contact-cta-header p{
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+.contact-cta-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.contact-cta-card{
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.contact-cta-info h3,
+.contact-cta-form-card h3{
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.contact-cta-note{
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.contact-cta-whatsapp{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+    width: 100%;
+    min-height: 56px;
+    padding: 0 1.25rem;
+    border-radius: 14px;
+    background: rgba(16, 185, 129, .12);
+    border: 1px solid rgba(16, 185, 129, .35);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 700;
+    transition: .3s ease;
+}
+
+.contact-cta-whatsapp:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px rgba(16, 185, 129, .25), var(--glow-hover);
+}
+
+.contact-cta-socials{
+    margin-top: 2rem;
+}
+
+.contact-cta-socials h4{
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.contact-cta-social-nav{
+    display: grid;
+    gap: .8rem;
+}
+
+.contact-cta-social-nav a{
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: 1rem;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: .3s ease;
+}
+
+.contact-cta-social-nav a:hover{
+    color: var(--color-cyan);
+    border-color: rgba(0, 229, 255, .35);
+    transform: translateX(4px);
+    box-shadow: var(--glow-hover);
+}
+
+.contact-cta-form{
+    display: grid;
+    gap: 1rem;
+}
+
+.contact-cta-field{
+    display: grid;
+    gap: .45rem;
+}
+
+.contact-cta-field label{
+    color: var(--text-primary);
+    font-size: .95rem;
+    font-weight: 600;
+}
+
+.contact-cta-field input,
+.contact-cta-field textarea{
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 1rem;
+    outline: none;
+    transition: .3s ease;
+}
+
+.contact-cta-field input:focus,
+.contact-cta-field textarea:focus{
+    border-color: rgba(0, 229, 255, .55);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, .08);
+}
+
+.contact-cta-field textarea{
+    resize: vertical;
+    min-height: 140px;
+}
+
+.contact-cta-submit{
+    min-height: 56px;
+    border: none;
+    border-radius: 14px;
+    background: rgba(0, 229, 255, .12);
+    color: var(--text-primary);
+    border: 1px solid rgba(0, 229, 255, .25);
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.contact-cta-submit:hover{
+    transform: translateY(-2px);
+    box-shadow: var(--glow-hover);
+    border-color: rgba(0, 229, 255, .45);
+}
+
+
+
+
+
+
+.contato {
+    padding: 120px 8%;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.contact-header h2 {
+    font-size: 3rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.contact-header p {
+    color: var(--text-secondary);
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.contact-info,
+.contact-form-wrapper {
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 20px;
+
+    padding: 2rem;
+}
+
+.contact-info h3,
+.contact-form-wrapper h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.contact-info p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* WhatsApp */
+
+.btn-whatsapp {
+    margin-top: 2rem;
+
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: var(--color-success);
+
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-3px);
+}
+
+/* Redes */
+
+.social-links {
+    margin-top: 3rem;
+}
+
+.social-links h4 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.social-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.social-nav a {
+    color: var(--color-cyan);
+    text-decoration: none;
+}
+
+.social-nav a:hover {
+    text-shadow: 0 0 10px var(--color-cyan);
+}
+
+/* Formulário */
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: .5rem;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea {
+    background: var(--bg-secondary);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 10px;
+
+    padding: 1rem;
+
+    color: var(--text-primary);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-cyan);
+}
+
+.btn-enviar {
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: var(--color-cyan);
+
+    color: #000;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.btn-enviar:hover {
+    box-shadow: var(--glow-hover);
+}
