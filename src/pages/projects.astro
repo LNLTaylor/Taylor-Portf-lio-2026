@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "../components/ProjectCard.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const projects = (await getCollection("projects", ({ data }) => data.published))
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured));
+const categoryLabels: Record<string, string> = {
+  development: "Desenvolvimento",
+  design: "Design",
+  data: "Dados",
+  automation: "Automação",
+};
+const categories = [...new Set(projects.map((project) => project.data.category))];
+---
+
+<SiteLayout title="Projetos" description="Estudos de caso e projetos de Taylor Soares." currentPage="projects">
+  <section class="page-hero section-shell">
+    <p class="eyebrow">04 / PROJETOS</p>
+    <h1>Ideias que<br /><span>viraram trabalho.</span></h1>
+    <p class="page-lede">Cada projeto publicado mostra o contexto, as escolhas e o que aprendi ao construir.</p>
+  </section>
+  <section class="section-shell section-block">
+    {projects.length ? (
+      <>
+        <div class="filter-row" role="group" aria-label="Filtrar projetos">
+          <button class="filter-button is-active" type="button" data-project-filter="all" aria-pressed="true">Todos</button>
+          {categories.map((category) => <button class="filter-button" type="button" data-project-filter={category} aria-pressed="false">{categoryLabels[category] ?? category}</button>)}
+        </div>
+        <div class="project-grid project-grid-large">
+          {projects.map((project) => <div data-project-category={project.data.category}><ProjectCard project={project} /></div>)}
+        </div>
+      </>
+    ) : (
+      <div class="empty-state empty-state-large">
+        <span class="empty-index">PORTFÓLIO EM CONSTRUÇÃO</span>
+        <h2>Prefiro mostrar trabalho real, não preencher espaço.</h2>
+        <p>Os estudos de caso serão adicionados aqui quando estiverem documentados e prontos para compartilhar.</p>
+      </div>
+    )}
+  </section>
+</SiteLayout>
+
+<script>
+  import "../scripts/project-filters.ts";
+</script>

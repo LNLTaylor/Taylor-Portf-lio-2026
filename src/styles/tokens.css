@@ -1,0 +1,54 @@
+:root {
+  color-scheme: light;
+  --color-paper: #f4f1e9;
+  --color-surface: #eae5da;
+  --color-ink: #171a18;
+  --color-muted: #646760;
+  --color-line: rgb(23 26 24 / 14%);
+  --color-accent: #a63c26;
+  --color-plum: #542f70;
+  --color-ambient: rgb(213 92 58 / 6%);
+  --color-grid: transparent;
+  --color-orbit: rgb(213 92 58 / 12%);
+  --color-orbit-shadow: rgb(68 29 78 / 12%);
+  --color-dark-text: #b7b6af;
+  --color-dark-border: rgb(255 255 255 / 17%);
+  --color-menu-shadow: rgb(24 27 25 / 9%);
+  --color-footer-bg: #171a18;
+  --color-footer-text: #f4f1e9;
+  --color-manifesto-bg: #171a18;
+  --color-manifesto-accent: #d2644a;
+  --color-button-bg: #171a18;
+  --color-button-text: #f4f1e9;
+  --color-filter-bg: #171a18;
+  --color-filter-text: #f4f1e9;
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-body: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --content-width: 76rem;
+}
+
+:root[data-theme="tech"] {
+  color-scheme: dark;
+  --color-paper: #0a0f1c;
+  --color-surface: #111827;
+  --color-ink: #f8fafc;
+  --color-muted: #c7d2fe;
+  --color-line: rgb(148 163 184 / 20%);
+  --color-accent: #00e5ff;
+  --color-plum: #22d3ee;
+  --color-ambient: rgb(0 229 255 / 10%);
+  --color-grid: rgb(34 211 238 / 8%);
+  --color-orbit: rgb(0 229 255 / 22%);
+  --color-orbit-shadow: rgb(0 229 255 / 18%);
+  --color-dark-text: #c7d2fe;
+  --color-dark-border: rgb(148 163 184 / 22%);
+  --color-menu-shadow: rgb(0 0 0 / 35%);
+  --color-footer-bg: #060a12;
+  --color-footer-text: #f8fafc;
+  --color-manifesto-bg: #111827;
+  --color-manifesto-accent: #00e5ff;
+  --color-button-bg: #111827;
+  --color-button-text: #00e5ff;
+  --color-filter-bg: #164152;
+  --color-filter-text: #a5f3fc;
+}

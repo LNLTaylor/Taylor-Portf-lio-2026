@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { mediaUrl } from "../data/links";
+
+const certificates = (await getCollection("certificates", ({ data }) => data.published))
+  .sort((a, b) => (b.data.issued_at ?? "").localeCompare(a.data.issued_at ?? ""));
+---
+
+<SiteLayout title="Certificados" description="Formação e certificados de Taylor Soares." currentPage="certificates">
+  <section class="page-hero section-shell">
+    <p class="eyebrow">06 / FORMAÇÃO</p>
+    <h1>Aprender é<br /><span>parte do trabalho.</span></h1>
+    <p class="page-lede">Certificados publicados aqui correspondem a formações concluídas e podem incluir um documento ou link de validação.</p>
+  </section>
+  <section class="section-shell section-block">
+    {certificates.length ? (
+      <div class="certificate-list">
+        {certificates.map((certificate) => {
+          const attachment = mediaUrl(certificate.data.attachment);
+          return (
+            <article class="certificate-row">
+              <div><span class="eyebrow">{certificate.data.issued_at ?? "FORMAÇÃO"}</span><h2>{certificate.data.title}</h2><p>{certificate.data.institution}</p></div>
+              <div class="certificate-actions">
+                {attachment && <a class="text-link" href={attachment} target="_blank" rel="noopener noreferrer">Abrir PDF <span aria-hidden="true">↗</span></a>}
+                {certificate.data.verification_url && <a class="text-link" href={certificate.data.verification_url} target="_blank" rel="noopener noreferrer">Verificar <span aria-hidden="true">↗</span></a>}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    ) : (
+      <div class="empty-state"><p>Os certificados serão adicionados quando os documentos estiverem organizados para compartilhamento.</p></div>
+    )}
+  </section>
+</SiteLayout>

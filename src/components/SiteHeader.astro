@@ -1,0 +1,79 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { localUrl } from "../data/links";
+
+interface Props {
+  currentPage: string;
+  site: CollectionEntry<"site">["data"];
+}
+
+const { currentPage, site } = Astro.props;
+
+const navigation = [
+  { href: "index.html", label: "Início", key: "home" },
+  { href: "projects.html", label: "Projetos", key: "projects" },
+  { href: "about.html", label: "Sobre", key: "about" },
+  { href: "services.html", label: "Serviços", key: "services" },
+  { href: "products.html", label: "Produtos", key: "products" },
+  { href: "certificates.html", label: "Certificados", key: "certificates" },
+  { href: "contact.html", label: "Contato", key: "contact" },
+];
+---
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header class="site-header">
+  <a class="brand" href={localUrl("index.html")} aria-label={`${site.brand}, página inicial`}>
+    <img
+      class="brand-mark"
+      src={localUrl("assets/images/logo_portfolio.png")}
+      alt=""
+      width="64"
+      height="64"
+    />
+    <span class="brand-name">{site.brand}<span class="brand-period">.</span></span>
+  </a>
+
+  <nav id="navegacao-principal" class="site-nav" aria-label="Navegação principal">
+    {
+      navigation.map((item) => (
+        <a
+          href={localUrl(item.href)}
+          aria-current={currentPage === item.key ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+
+  <div class="header-controls">
+    <button
+      class="theme-toggle"
+      type="button"
+      data-theme-toggle
+      aria-label="Ativar modo tech"
+      aria-pressed="false"
+      title="Ativar modo tech"
+    >
+      <svg class="theme-icon-light" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+      </svg>
+      <svg class="theme-icon-tech" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.2 15.4A8.6 8.6 0 0 1 8.6 3.8 8.8 8.8 0 1 0 20.2 15.4Z"></path>
+        <path d="m16.5 3 .6 1.9L19 5.5l-1.9.6-.6 1.9-.6-1.9-1.9-.6 1.9-.6.6-1.9Z"></path>
+      </svg>
+      <span class="theme-toggle-label" data-theme-label>Modo tech</span>
+    </button>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir navegação"
+      aria-expanded="false"
+      aria-controls="navegacao-principal"
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>

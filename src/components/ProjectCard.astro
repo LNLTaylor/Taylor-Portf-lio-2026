@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { localUrl, mediaUrl } from "../data/links";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const cover = mediaUrl(project.data.cover);
+const categoryLabels: Record<string, string> = {
+  development: "Desenvolvimento",
+  design: "Design",
+  data: "Dados",
+  automation: "Automação",
+};
+const categoryLabel = categoryLabels[project.data.category] ?? project.data.category;
+---
+
+<article class="project-card">
+  <a class="project-cover" href={localUrl(`projetos/${project.id}.html`)}>
+    {
+      cover ? (
+        <img
+          src={cover}
+          alt={project.data.cover_alt || project.data.title}
+          width="1200"
+          height="800"
+          loading="lazy"
+        />
+      ) : (
+        <span class="project-cover-placeholder" aria-hidden="true">
+          {categoryLabel}
+        </span>
+      )
+    }
+    <span class="project-open">Ver estudo <span aria-hidden="true">↗</span></span>
+  </a>
+  <div class="project-card-copy">
+    <div class="project-meta">
+      <span>{categoryLabel}</span>
+      {project.data.year && <span>{project.data.year}</span>}
+    </div>
+    <h3><a href={localUrl(`projetos/${project.id}.html`)}>{project.data.title}</a></h3>
+    <p>{project.data.summary}</p>
+  </div>
+</article>

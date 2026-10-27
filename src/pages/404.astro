@@ -1,0 +1,12 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { localUrl } from "../data/links";
+---
+
+<SiteLayout title="Página não encontrada" description="A página solicitada não foi encontrada." currentPage="">
+  <section class="page-hero section-shell not-found">
+    <p class="eyebrow">404 / FORA DE ROTA</p>
+    <h1>Esta página<br /><span>não existe.</span></h1>
+    <a class="button button-primary" href={localUrl("index.html")}>Voltar ao início <span aria-hidden="true">↗</span></a>
+  </section>
+</SiteLayout>

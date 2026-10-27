@@ -1,0 +1,35 @@
+---
+import { getEntry } from "astro:content";
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const siteEntry = await getEntry("site", "settings");
+if (!siteEntry) throw new Error("Dados do portfólio não encontrados.");
+const site = siteEntry.data;
+const whatsappMessage = encodeURIComponent("Olá, Taylor! Encontrei seu portfólio e gostaria de conversar sobre um projeto.");
+---
+
+<SiteLayout title="Contato" description={`Entre em contato com ${site.name} para conversar sobre um projeto.`} currentPage="contact">
+  <section class="page-hero section-shell">
+    <p class="eyebrow">07 / CONTATO</p>
+    <h1>Boas conversas<br /><span>começam por aqui.</span></h1>
+    <p class="page-lede">Conte um pouco sobre o que você precisa. Eu retorno pelo canal que for melhor para você.</p>
+  </section>
+  <section class="section-shell section-block contact-layout">
+    <div class="contact-intro">
+      <p class="eyebrow">DIGA OLÁ</p>
+      <p>Prefiro começar entendendo a ideia, o contexto e o que você espera alcançar. Sem compromisso.</p>
+    </div>
+    <div class="contact-options">
+      <a class="contact-option" href={`https://wa.me/${site.whatsapp}?text=${whatsappMessage}`} target="_blank" rel="noopener noreferrer">
+        <span class="contact-option-label">RESPOSTA MAIS RÁPIDA</span><span class="contact-option-title">WhatsApp <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="contact-option" href={`mailto:${site.email}?subject=${encodeURIComponent("Vamos conversar sobre um projeto")}`}>
+        <span class="contact-option-label">PARA MAIS DETALHES</span><span class="contact-option-title">E-mail <span aria-hidden="true">↗</span></span>
+        <span class="contact-option-detail">{site.email}</span>
+      </a>
+      <a class="contact-option" href={site.linkedin} target="_blank" rel="noopener noreferrer">
+        <span class="contact-option-label">CONEXÕES PROFISSIONAIS</span><span class="contact-option-title">LinkedIn <span aria-hidden="true">↗</span></span>
+      </a>
+    </div>
+  </section>
+</SiteLayout>

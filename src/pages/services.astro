@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { localUrl } from "../data/links";
+
+const services = (await getCollection("services", ({ data }) => data.published))
+  .sort((a, b) => a.data.order - b.data.order);
+const categories = [
+  { id: "web", label: "Web" },
+  { id: "design", label: "Design" },
+  { id: "analytics", label: "Dados" },
+  { id: "maintenance", label: "Manutenção" },
+];
+---
+
+<SiteLayout title="Serviços" description="Serviços digitais, escopo e valores de Taylor Soares." currentPage="services">
+  <section class="page-hero section-shell">
+    <p class="eyebrow">03 / SERVIÇOS</p>
+    <h1>Peças digitais<br /><span>bem resolvidas.</span></h1>
+    <p class="page-lede">Cada trabalho começa com uma conversa sobre a necessidade, o escopo e o que significa um bom resultado.</p>
+  </section>
+
+  <section class="section-shell section-block">
+    <div class="filter-row" role="group" aria-label="Filtrar serviços">
+      <button class="filter-button is-active" type="button" data-service-filter="all" aria-pressed="true">Todos</button>
+      {categories.map((category) => <button class="filter-button" type="button" data-service-filter={category.id} aria-pressed="false">{category.label}</button>)}
+    </div>
+    {services.length ? (
+      <div class="service-list">
+        {services.map((service) => (
+          <article class="service-row" data-service-category={service.data.category}>
+            <span class="service-category">{categories.find((category) => category.id === service.data.category)?.label}</span>
+            <div class="service-copy"><h2>{service.data.title}</h2><p>{service.data.description}</p></div>
+            <span class="service-price">{service.data.price}</span>
+            <a class="service-arrow" href={localUrl("contact.html")} aria-label={`Solicitar orçamento para ${service.data.title}`}>↗</a>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-state"><p>Os serviços estão sendo organizados. Entre em contato para conversar sobre sua necessidade.</p></div>
+    )}
+    <p class="service-footnote">Os valores publicados são referências; escopo, prazo e orçamento final são confirmados antes de cada trabalho.</p>
+  </section>
+</SiteLayout>
+
+<script>
+  import "../scripts/service-filters.ts";
+</script>

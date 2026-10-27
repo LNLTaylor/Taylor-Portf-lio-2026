@@ -1,0 +1,174 @@
+media:
+  - name: images
+    label: Imagens
+    input: public/media/images
+    output: /media/images
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: documents
+    label: Documentos
+    input: public/media/documents
+    output: /media/documents
+    extensions: [pdf]
+    rename: safe
+
+content:
+  - name: site
+    label: Dados do portfólio
+    type: file
+    path: src/content/site/settings.yaml
+    format: yaml
+    fields:
+      - { name: name, label: Nome, type: string, required: true }
+      - { name: brand, label: Marca, type: string, required: true }
+      - { name: tagline, label: Identificação curta, type: string, required: true }
+      - { name: headline, label: Chamada principal, type: string, required: true }
+      - { name: introduction, label: Apresentação, type: text, required: true }
+      - { name: email, label: E-mail, type: string, required: true }
+      - { name: whatsapp, label: WhatsApp com código do país, type: string, required: true }
+      - { name: github, label: GitHub, type: string, required: true }
+      - { name: linkedin, label: LinkedIn, type: string, required: true }
+      - { name: instagram, label: Instagram, type: string, required: true }
+      - { name: tiktok, label: TikTok, type: string }
+      - name: resume
+        label: Currículo em PDF
+        type: file
+        options:
+          media: documents
+          path: public/media/documents
+          extensions: [pdf]
+      - { name: seo_description, label: Descrição para buscadores, type: text, required: true }
+      - { name: footer_note, label: Mensagem do rodapé, type: text, required: true }
+    operations:
+      delete: false
+
+  - name: projects
+    label: Projetos e estudos de caso
+    type: collection
+    path: src/content/projects
+    filename: "{primary}.md"
+    format: yaml-frontmatter
+    view:
+      primary: title
+      fields: [title, category, year, featured, published]
+      sort: year
+      order: desc
+    fields:
+      - { name: title, label: Nome do projeto, type: string, required: true }
+      - { name: summary, label: Resumo, type: text, required: true }
+      - name: category
+        label: Categoria
+        type: select
+        options:
+          values:
+            - { name: development, label: Desenvolvimento }
+            - { name: design, label: Design }
+            - { name: data, label: Dados }
+            - { name: automation, label: Automação }
+      - { name: year, label: Ano, type: number }
+      - { name: role, label: Meu papel no projeto, type: text }
+      - name: cover
+        label: Imagem de capa
+        type: image
+        options:
+          media: images
+          path: public/media/images/projects
+          extensions: [jpg, jpeg, png, webp]
+      - { name: cover_alt, label: Descrição da imagem, type: string }
+      - { name: challenge, label: Problema e contexto, type: text }
+      - { name: decisions, label: Processo e decisões, type: text }
+      - { name: outcome, label: Resultado e aprendizados, type: text }
+      - { name: technologies, label: Tecnologias (separadas por vírgula), type: string }
+      - { name: live_url, label: Link da demonstração, type: string }
+      - { name: source_url, label: Link do código, type: string }
+      - { name: featured, label: Destacar na página inicial, type: boolean, default: false }
+      - { name: published, label: Publicar no portfólio, type: boolean, default: false }
+    operations:
+      create: true
+      rename: true
+      delete: true
+
+  - name: certificates
+    label: Certificados
+    type: collection
+    path: src/content/certificates
+    filename: "{primary}.yaml"
+    format: yaml
+    view:
+      primary: title
+      fields: [title, institution, issued_at, published]
+    fields:
+      - { name: title, label: Curso ou certificado, type: string, required: true }
+      - { name: institution, label: Instituição emissora, type: string, required: true }
+      - { name: issued_at, label: Data de emissão, type: date, default: "", options: { format: "yyyy-MM" } }
+      - { name: verification_url, label: Link de verificação, type: string }
+      - name: attachment
+        label: Certificado em PDF
+        type: file
+        options:
+          media: documents
+          path: public/media/documents/certificates
+          extensions: [pdf]
+      - { name: published, label: Publicar no portfólio, type: boolean, default: false }
+    operations:
+      create: true
+      rename: true
+      delete: true
+
+  - name: services
+    label: Serviços e preços
+    type: collection
+    path: src/content/services
+    filename: "{primary}.yaml"
+    format: yaml
+    view:
+      primary: title
+      fields: [title, category, price, published]
+    fields:
+      - { name: title, label: Serviço, type: string, required: true }
+      - name: category
+        label: Categoria
+        type: select
+        options:
+          values:
+            - { name: web, label: Web }
+            - { name: design, label: Design }
+            - { name: analytics, label: Dados e análise }
+            - { name: maintenance, label: Manutenção }
+      - { name: description, label: O que está incluído, type: text, required: true }
+      - { name: price, label: Preço ou indicação de orçamento, type: string, required: true }
+      - { name: order, label: Ordem de exibição, type: number, default: 100 }
+      - { name: published, label: Exibir no portfólio, type: boolean, default: true }
+    operations:
+      create: true
+      rename: true
+      delete: true
+
+  - name: products
+    label: Produtos digitais
+    type: collection
+    path: src/content/products
+    filename: "{primary}.yaml"
+    format: yaml
+    view:
+      primary: title
+      fields: [title, price, published]
+    fields:
+      - { name: title, label: Nome do produto, type: string, required: true }
+      - { name: summary, label: Descrição, type: text, required: true }
+      - name: cover
+        label: Imagem
+        type: image
+        options:
+          media: images
+          path: public/media/images/products
+          extensions: [jpg, jpeg, png, webp]
+      - { name: cover_alt, label: Descrição da imagem, type: string }
+      - { name: price, label: Preço, type: string }
+      - { name: purchase_url, label: Link de compra, type: string }
+      - { name: order, label: Ordem de exibição, type: number, default: 100 }
+      - { name: published, label: Exibir no portfólio, type: boolean, default: false }
+    operations:
+      create: true
+      rename: true
+      delete: true

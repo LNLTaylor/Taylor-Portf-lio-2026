@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { localUrl } from "../data/links";
+
+interface Props {
+  site: CollectionEntry<"site">["data"];
+}
+
+const { site } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="footer-main">
+    <a class="footer-brand" href={localUrl("index.html")}>{site.brand}<span>.</span></a>
+    <p>{site.footer_note}</p>
+    <nav class="footer-nav" aria-label="Navegação do rodapé">
+      <a href={localUrl("projects.html")}>Projetos</a>
+      <a href={localUrl("about.html")}>Sobre</a>
+      <a href={localUrl("services.html")}>Serviços</a>
+      <a href={localUrl("products.html")}>Produtos</a>
+      <a href={localUrl("contact.html")}>Contato</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <span>© {new Date().getFullYear()} {site.name}</span>
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+  </div>
+</footer>

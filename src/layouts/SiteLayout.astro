@@ -1,0 +1,62 @@
+---
+import { getEntry } from "astro:content";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/global.css";
+import { localUrl } from "../data/links";
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPage: string;
+}
+
+const { title, description, currentPage } = Astro.props;
+const siteEntry = await getEntry("site", "settings");
+
+if (!siteEntry) {
+  throw new Error("Os dados do portfólio não foram encontrados em src/content/site/settings.yaml.");
+}
+
+const site = siteEntry.data;
+const pageDescription = description ?? site.seo_description;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <script is:inline>
+      try {
+        const savedTheme = localStorage.getItem("portfolio-theme");
+        if (savedTheme === "light" || savedTheme === "tech") {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch (error) {
+        console.warn("Não foi possível restaurar o tema salvo.", error);
+      }
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={pageDescription} />
+    <meta name="theme-color" content="#10110f" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} — ${site.name}`} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/png" href={localUrl("assets/images/logo__port.png")} />
+    <title>{title} — {site.name}</title>
+  </head>
+  <body>
+    <SiteHeader currentPage={currentPage} site={site} />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <SiteFooter site={site} />
+    <script>
+      import "../scripts/menu.ts";
+      import "../scripts/theme.ts";
+    </script>
+  </body>
+</html>

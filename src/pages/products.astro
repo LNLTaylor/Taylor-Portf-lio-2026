@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { mediaUrl } from "../data/links";
+
+const products = (await getCollection("products", ({ data }) => data.published))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<SiteLayout title="Produtos" description="Produtos digitais de Taylor Soares." currentPage="products">
+  <section class="page-hero section-shell">
+    <p class="eyebrow">05 / PRODUTOS</p>
+    <h1>Ferramentas para<br /><span>fazer mais.</span></h1>
+    <p class="page-lede">Recursos digitais criados para resolver tarefas e deixar o trabalho mais simples.</p>
+  </section>
+  <section class="section-shell section-block">
+    {products.length ? (
+      <div class="project-grid">
+        {products.map((product) => {
+          const cover = mediaUrl(product.data.cover);
+          return (
+            <article class="project-card product-card">
+              <div class="project-cover">
+                {cover ? (
+                  <img
+                    src={cover}
+                    alt={product.data.cover_alt || product.data.title}
+                    width="1200"
+                    height="800"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span class="project-cover-placeholder">PRODUTO DIGITAL</span>
+                )}
+              </div>
+              <div class="project-card-copy">
+                {product.data.price && <div class="project-meta"><span>Produto digital</span><span>{product.data.price}</span></div>}
+                <h2 class="product-title">{product.data.title}</h2>
+                <p>{product.data.summary}</p>
+                {product.data.purchase_url && (
+                  <a class="text-link product-link" href={product.data.purchase_url} target="_blank" rel="noopener noreferrer">
+                    Conhecer produto <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    ) : (
+      <div class="empty-state">
+        <p>Quando houver recursos digitais prontos para compartilhar, eles estarão disponíveis aqui.</p>
+      </div>
+    )}
+  </section>
+</SiteLayout>

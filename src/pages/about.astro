@@ -1,0 +1,50 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import ProjectCard from "../components/ProjectCard.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { localUrl, mediaUrl } from "../data/links";
+
+const siteEntry = await getEntry("site", "settings");
+if (!siteEntry) throw new Error("Dados do portfólio não encontrados.");
+const site = siteEntry.data;
+const projects = (await getCollection("projects", ({ data }) => data.published)).slice(0, 2);
+const resume = mediaUrl(site.resume);
+---
+
+<SiteLayout title="Sobre" description={`Conheça ${site.name}, sua trajetória e áreas de trabalho.`} currentPage="about">
+  <section class="page-hero section-shell">
+    <p class="eyebrow">02 / SOBRE</p>
+    <h1>Olá, eu sou<br /><span>{site.name}.</span></h1>
+    <p class="page-lede">{site.introduction}</p>
+    <div class="about-links">
+      <a class="text-link" href={site.github} target="_blank" rel="noopener noreferrer">Meu GitHub <span aria-hidden="true">↗</span></a>
+      <a class="text-link" href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+      {resume && <a class="text-link" href={resume} target="_blank" rel="noopener noreferrer">Currículo em PDF <span aria-hidden="true">↗</span></a>}
+    </div>
+  </section>
+
+  <section class="section-shell section-block about-principles">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">COMO EU PENSO</p>
+        <h2>Tecnologia com<br /><span>intenção.</span></h2>
+      </div>
+      <p class="section-aside">Meu trabalho conecta desenvolvimento, design e ferramentas digitais para resolver necessidades reais — sem complicar o que pode ser simples.</p>
+    </div>
+    <div class="principle-list">
+      <article><span>01</span><div><h3>Entender antes de construir</h3><p>O contexto e as pessoas que vão usar a solução vêm antes da escolha de ferramenta.</p></div></article>
+      <article><span>02</span><div><h3>Detalhe também é função</h3><p>Clareza, acessibilidade e consistência fazem parte do produto, não são acabamento opcional.</p></div></article>
+      <article><span>03</span><div><h3>Aprender em público</h3><p>Projetos e estudos de caso documentam decisões, aprendizados e o que pode ser melhorado.</p></div></article>
+    </div>
+  </section>
+
+  {projects.length > 0 && (
+    <section class="section-shell section-block">
+      <div class="section-heading">
+        <div><p class="eyebrow">TRABALHO EM CONTEXTO</p><h2>Algumas escolhas<br /><span>em prática.</span></h2></div>
+        <a class="text-link" href={localUrl("projects.html")}>Ver projetos <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="project-grid">{projects.map((project) => <ProjectCard project={project} />)}</div>
+    </section>
+  )}
+</SiteLayout>
