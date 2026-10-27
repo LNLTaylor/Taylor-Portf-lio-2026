@@ -23,18 +23,31 @@ test("todas as páginas principais abrem com título e conteúdo", async ({ page
 
 test("as páginas não criam rolagem horizontal em telas pequenas ou grandes", async ({ page }) => {
   for (const viewport of [
+    { width: 320, height: 740 },
     { width: 390, height: 844 },
+    { width: 768, height: 1024 },
+    { width: 1024, height: 768 },
     { width: 1280, height: 900 },
+    { width: 1920, height: 1080 },
   ]) {
     await page.setViewportSize(viewport);
 
     for (const path of pages) {
       await page.goto(path);
       const hasHorizontalOverflow = await page.evaluate(
-        () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+        () => document.documentElement.scrollWidth > window.innerWidth,
       );
 
       expect(hasHorizontalOverflow, `${path} em ${viewport.width}px`).toBe(false);
+
+      if (path === "index.html") {
+        const logoRatio = await page.locator(".hero-art img").evaluate((image) => {
+          const { width, height } = image.getBoundingClientRect();
+          return width / height;
+        });
+
+        expect(logoRatio, `proporção do lobo em ${viewport.width}px`).toBeCloseTo(1, 2);
+      }
     }
   }
 });

@@ -405,6 +405,9 @@ p {
 
 .hero-art img {
   width: min(22rem, 78%);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
   filter: drop-shadow(0 1.2rem 2rem var(--color-orbit-shadow));
   animation: float-mark 7s ease-in-out infinite;
 }
