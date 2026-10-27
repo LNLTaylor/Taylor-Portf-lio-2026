@@ -98,6 +98,12 @@ test("as páginas principais não apresentam violações WCAG automatizadas", as
 
     for (const theme of ["light", "tech"] as const) {
       if (theme === "tech") await page.getByRole("button", { name: "Ativar modo tech" }).click();
+      await expect
+        .poll(() =>
+          page.locator(".theme-toggle").evaluate((button) => getComputedStyle(button).backgroundColor),
+        )
+        .toBe(theme === "tech" ? "rgb(17, 24, 39)" : "rgb(234, 229, 218)");
+
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
         .analyze();
